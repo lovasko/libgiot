@@ -1,0 +1,12 @@
+cflags = -g -fPIC -Isrc -Wall -Wextra -Weverything
+ldflags = -lits
+
+rule compile
+ command = clang $cflags -c $in -o $out
+
+rule link
+ command = clang -fPIC -o $out $in $ldflags
+
+build obj/main.o: compile src/main.c
+build bin/giotls: link obj/main.o
+
