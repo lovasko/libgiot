@@ -1,0 +1,12 @@
+cflags = -g -fPIC -Isrc -ansi -pedantic -Wall -Wextra -Weverything
+ldflags = -lmintcombo
+
+rule compile
+ command = clang $cflags -c $in -o $out
+
+rule link
+ command = clang -fPIC -o $out $in $ldflags
+
+build obj/main.o: compile src/main.c
+build bin/giotgen: link obj/main.o
+
